@@ -1,20 +1,12 @@
 
 import { StoreContext } from '../../context/StoreContext';
 import './Fillters.css'
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 
 const Filters = () => {
 
   const [isOpen,setIsOpen] =useState(false);
-  const {makeFilters,modelFilters,yearFilters,chassisFilters,applyFilter,toggleMake,toggleModel,toggleYear,toggleChassis,products} =useContext(StoreContext)
-
-  
-  
-  
-    
-  useEffect(()=>{
-    applyFilter();
-  },[makeFilters,modelFilters,yearFilters,chassisFilters]);
+  const {makeFilters,modelFilters,yearFilters,chassisFilters,toggleMake,toggleModel,toggleYear,toggleChassis,products} =useContext(StoreContext)
 
   const options = useMemo(()=>{
     const makes = Array.from(new Set(products.map(p=>p.make).filter(Boolean)));

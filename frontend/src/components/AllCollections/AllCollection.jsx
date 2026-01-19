@@ -1,21 +1,12 @@
 import { StoreContext } from "../../context/StoreContext";
 import Item from "../Item/Item";
 import "./AllCollection.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 
 const AllCollection = ({url}) => {
 
     
-    const {filterProducts,applyFilter,category,subCategory,search,sortProducts,setSortType,sortType,products} =useContext(StoreContext)
-    
-    
-    useEffect(()=>{
-      sortProducts();
-    },[sortType])
-
-    useEffect(()=>{
-      applyFilter();
-    },[category,subCategory,search,products])
+    const {filterProducts,setSortType,sortType} =useContext(StoreContext)
 
     
 
@@ -30,9 +21,9 @@ const AllCollection = ({url}) => {
           </p>
           <p className="all-collectin-bar"></p>
         </div>
-        <div class="sort-dropdown">
-          <label for="sort">Sort by:</label>
-          <select onChange={(e)=>setSortType(e.target.value)} id="sort" name="sort">
+        <div className="sort-dropdown">
+          <label htmlFor="sort">Sort by:</label>
+          <select value={sortType} onChange={(e)=>setSortType(e.target.value)} id="sort" name="sort">
             <option value="relavent">Relavent</option>
             <option value="low-to-high">Price: Low To High</option>
             <option value="high-to-low">Price: High To Low</option>

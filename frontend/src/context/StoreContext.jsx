@@ -75,29 +75,23 @@ const StoreContextProvider = (props) => {
     if (chassisFilters.length>0) {
       productsCopy=productsCopy.filter((item)=>chassisFilters.includes(item.chassisCode));
     }
-    setFilterProducts(productsCopy)
-  } ;
-
-  //sort Product
-  const sortProducts =()=>{
-    let fpCopy =filterProducts.slice();
 
     switch (sortType) {
       case "low-to-high":
-        setFilterProducts(fpCopy.sort((a,b)=>a.price-b.price));
+        productsCopy = productsCopy.slice().sort((a,b)=>a.price-b.price);
         break;
       case "high-to-low" :
-        setFilterProducts(fpCopy.sort((a,b)=>b.price-a.price));
+        productsCopy = productsCopy.slice().sort((a,b)=>b.price-a.price);
         break;
-
       case "newest":
-        setFilterProducts(fpCopy.sort((a,b)=> new Date(b.date)- new Date(a.date)))
+        productsCopy = productsCopy.slice().sort((a,b)=> new Date(b.date)- new Date(a.date))
         break;
       default:
-        applyFilter();
         break;
     }
-  }
+
+    setFilterProducts(productsCopy)
+  } ;
 
   //cart data
 
@@ -241,14 +235,28 @@ const StoreContextProvider = (props) => {
 
 
  useEffect(()=>{
+   applyFilter();
+ },[products,search,makeFilters,modelFilters,yearFilters,chassisFilters,sortType])
+
+
+ useEffect(()=>{
       async function loadData() {
         await fetchClothList()
-        if (!token && localStorage.getItem("token")) {
-          setToken(localStorage.getItem("token"));
-          await loadCartData(localStorage.getItem("token"))
+        const existing = localStorage.getItem("token")
+        if (existing) {
+          setToken(existing)
         }
       }
       loadData();
+ },[])
+
+ useEffect(()=>{
+    async function fetchCart() {
+      if (token) {
+        await loadCartData(token)
+      }
+    }
+    fetchCart()
  },[token])
 
   
@@ -260,7 +268,7 @@ const StoreContextProvider = (props) => {
         chassisFilters,setChassisFilters,toggleChassis,
         applyFilter,setFilterProducts,
         filterProducts,cartItem,setCartItems,
-      sortProducts,addToCart,
+      addToCart,
         setSortType,productData,setProductData,
         sortType,search,setSearch,
         visible,setVisible,sizes,setSizes,
