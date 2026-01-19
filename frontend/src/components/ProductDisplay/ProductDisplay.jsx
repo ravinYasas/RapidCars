@@ -1,13 +1,15 @@
 import './ProductDisplay.css'
 import {useParams} from 'react-router-dom'
 import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext'
 import RelatedProduct from '../RelatedProduct/RelatedProduct'
 import Description from '../Description/Description'
 
 const ProductDisplay = () => {
-  const {products,productData,setProductData,addToCart} = useContext(StoreContext)
+  const {products,productData,setProductData,addToCart,token} = useContext(StoreContext)
     const {productId} =useParams();
+    const navigate = useNavigate();
     
     const [image,setImage]=useState([])
     const [selectedImage,setSelectedImage] = useState('')
@@ -60,7 +62,7 @@ const ProductDisplay = () => {
                 <p className="contact-text">Questions about this vehicle? Message us on WhatsApp.</p>
                 <a className="contact-button" href="https://wa.me/94775905443" target="_blank" rel="noreferrer">Chat on WhatsApp</a>
               </div>
-              <button onClick={()=>addToCart(productData._id)} className="add-to-cart">ADD TO PRE-ORDER CART</button>
+              <button onClick={()=> token ? addToCart(productData._id) : navigate('/login')} className="add-to-cart">ADD TO PRE-ORDER CART</button>
               <div className="product-details-detail">
                   <p>Includes original Japanese auction sheet.</p>
                   <p>We convert navigation to English before handover.</p>
