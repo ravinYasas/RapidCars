@@ -1,12 +1,12 @@
 
 import { StoreContext } from '../../context/StoreContext';
 import './Fillters.css'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 
 const Filters = () => {
 
   const [isOpen,setIsOpen] =useState(false);
-  const {category,setFilterProducts,applyFilter,toggleCategory,subCategory,products,toggleSubCategory} =useContext(StoreContext)
+  const {makeFilters,modelFilters,yearFilters,chassisFilters,applyFilter,toggleMake,toggleModel,toggleYear,toggleChassis,products} =useContext(StoreContext)
 
   
   
@@ -14,26 +14,50 @@ const Filters = () => {
     
   useEffect(()=>{
     applyFilter();
-  },[category,subCategory]);
+  },[makeFilters,modelFilters,yearFilters,chassisFilters]);
+
+  const options = useMemo(()=>{
+    const makes = Array.from(new Set(products.map(p=>p.make).filter(Boolean)));
+    const models = Array.from(new Set(products.map(p=>p.model).filter(Boolean)));
+    const years = Array.from(new Set(products.map(p=>String(p.year)).filter(Boolean)));
+    const chassis = Array.from(new Set(products.map(p=>p.chassisCode).filter(Boolean)));
+    return {makes,models,years,chassis};
+  },[products])
 
   return (
     <div className='filters-container'>
         <h2 onClick={()=>setIsOpen(!isOpen)}>Filtters</h2>
         <div className={`filter ${isOpen?"active":""}`}>
         <div className="categories">
-            <p>CATEGORIES</p>
+            <p>Make</p>
             <ul className="categories-checkbox">
-            <li><input type="checkbox" value={'Men'}  onChange={toggleCategory}/>Men</li>
-            <li><input type="checkbox" value={'Women'}  onChange={toggleCategory}/>Women</li>
-            <li><input type="checkbox"  value={'Kids'}  onChange={toggleCategory}/>Kids</li>
+              {options.makes.map(make=>(
+                <li key={make}><input type="checkbox" value={make} onChange={toggleMake}/> {make}</li>
+              ))}
             </ul>           
         </div>
         <div className="categories">
-            <p>Type</p>
+            <p>Model</p>
             <ul className="categories-checkbox">
-            <li><input type="checkbox" value={'Topwear'}  onChange={toggleSubCategory}/>Topwear</li>
-            <li><input type="checkbox" value={'Bottomwear'} onChange={toggleSubCategory}/>Bottomwear</li>
-            <li><input type="checkbox" value={'Winterwear'}  onChange={toggleSubCategory}/>Winterwear</li>
+            {options.models.map(model=>(
+              <li key={model}><input type="checkbox" value={model} onChange={toggleModel}/> {model}</li>
+            ))}
+            </ul>
+        </div>
+        <div className="categories">
+            <p>Year</p>
+            <ul className="categories-checkbox">
+            {options.years.map(year=>(
+              <li key={year}><input type="checkbox" value={year} onChange={toggleYear}/> {year}</li>
+            ))}
+            </ul>
+        </div>
+        <div className="categories">
+            <p>Chassis Code</p>
+            <ul className="categories-checkbox">
+            {options.chassis.map(code=>(
+              <li key={code}><input type="checkbox" value={code} onChange={toggleChassis}/> {code}</li>
+            ))}
             </ul>
         </div>
         </div>

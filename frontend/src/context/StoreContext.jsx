@@ -10,8 +10,10 @@ export const StoreContext = createContext(null)
 
 const StoreContextProvider = (props) => {
 //filter item
-    const [category,setCategory] =useState([])
-    const [subCategory,setSubCategory]=useState([]);
+    const [makeFilters,setMakeFilters] =useState([])
+    const [modelFilters,setModelFilters]=useState([]);
+    const [yearFilters,setYearFilters]=useState([]);
+    const [chassisFilters,setChassisFilters]=useState([]);
     const [filterProducts,setFilterProducts]=useState([]);
     const [sortType,setSortType] =useState("relavent")
     const [search,setSearch] =useState('')
@@ -26,21 +28,32 @@ const StoreContextProvider = (props) => {
 
     const [token,setToken] =useState("");
 
-  const toggleCategory=(e)=>{
-    if (category.includes(e.target.value)) {
-        setCategory(prev=>prev.filter(item=>item !==e.target.value))
-        
+  const toggleMake=(e)=>{
+    if (makeFilters.includes(e.target.value)) {
+        setMakeFilters(prev=>prev.filter(item=>item !==e.target.value))
     } else {
-      setCategory(prev=>[...prev,e.target.value])
+      setMakeFilters(prev=>[...prev,e.target.value])
     }
   }
-  
-
-  const toggleSubCategory =(e)=>{
-    if (subCategory.includes(e.target.value)) {
-        setSubCategory(prev=>prev.filter(item=>item !==e.target.value))
+  const toggleModel =(e)=>{
+    if (modelFilters.includes(e.target.value)) {
+        setModelFilters(prev=>prev.filter(item=>item !==e.target.value))
     } else {
-      setSubCategory(prev=>[...prev,e.target.value])
+      setModelFilters(prev=>[...prev,e.target.value])
+    }
+  }
+  const toggleYear =(e)=>{
+    if (yearFilters.includes(e.target.value)) {
+        setYearFilters(prev=>prev.filter(item=>item !==e.target.value))
+    } else {
+      setYearFilters(prev=>[...prev,e.target.value])
+    }
+  }
+  const toggleChassis =(e)=>{
+    if (chassisFilters.includes(e.target.value)) {
+        setChassisFilters(prev=>prev.filter(item=>item !==e.target.value))
+    } else {
+      setChassisFilters(prev=>[...prev,e.target.value])
     }
   }
   
@@ -50,11 +63,17 @@ const StoreContextProvider = (props) => {
     if (search.length>0) {
       productsCopy =productsCopy.filter(item =>  item.name.toLowerCase().includes(search.toLowerCase()))
     }
-    if (category.length>0) {
-        productsCopy=productsCopy.filter(item=>category.includes(item.category));
+    if (makeFilters.length>0) {
+        productsCopy=productsCopy.filter(item=>makeFilters.includes(item.make));
     }
-    if (subCategory.length>0) {
-      productsCopy=productsCopy.filter((item)=>subCategory.includes(item.subCategory));
+    if (modelFilters.length>0) {
+      productsCopy=productsCopy.filter((item)=>modelFilters.includes(item.model));
+    }
+    if (yearFilters.length>0) {
+      productsCopy=productsCopy.filter((item)=>yearFilters.includes(String(item.year)));
+    }
+    if (chassisFilters.length>0) {
+      productsCopy=productsCopy.filter((item)=>chassisFilters.includes(item.chassisCode));
     }
     setFilterProducts(productsCopy)
   } ;
@@ -82,30 +101,25 @@ const StoreContextProvider = (props) => {
 
   //cart data
 
-  const addToCart = async (itemId,sizes)=>{
-
-    if (!sizes) {
-      toast.error("select Product  size")
-      return;
-    }
-    
+  const addToCart = async (itemId,sizeValue)=>{
+    const selectedSize = sizeValue || 'default';
     let cartData = structuredClone(cartItem);
     
     if (cartData[itemId]) {
-      if (cartData[itemId][sizes]) {
-        cartData[itemId][sizes] +=1;
+      if (cartData[itemId][selectedSize]) {
+        cartData[itemId][selectedSize] +=1;
       } else {
-        cartData[itemId][sizes] = 1;
+        cartData[itemId][selectedSize] = 1;
       }
     }else{
         cartData[itemId] ={};
-        cartData[itemId][sizes] =1;
+        cartData[itemId][selectedSize] =1;
     }
 
     setCartItems(cartData)
 
     if (token) {
-      await axios.post(backendUrl+"/api/cart/add",{itemId,sizes},{headers:{token}})
+      await axios.post(backendUrl+"/api/cart/add",{itemId,sizes:selectedSize},{headers:{token}})
     }
     
   }
@@ -238,14 +252,12 @@ const StoreContextProvider = (props) => {
  },[token])
 
   
-    const delivery_fee = 10;   
-    
-
     const contextValue ={
-        delivery_fee,products,
-        category,setCategory,toggleCategory,
-        toggleSubCategory,
-        subCategory,setSubCategory,
+      products,
+        makeFilters,setMakeFilters,toggleMake,
+        modelFilters,setModelFilters,toggleModel,
+        yearFilters,setYearFilters,toggleYear,
+        chassisFilters,setChassisFilters,toggleChassis,
         applyFilter,setFilterProducts,
         filterProducts,cartItem,setCartItems,
       sortProducts,addToCart,

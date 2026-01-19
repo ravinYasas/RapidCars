@@ -6,7 +6,7 @@ import RelatedProduct from '../RelatedProduct/RelatedProduct'
 import Description from '../Description/Description'
 
 const ProductDisplay = () => {
-  const {products,sizes,setSizes,productData,setProductData,url,cartItem,setCartItems,addToCart} = useContext(StoreContext)
+  const {products,productData,setProductData,addToCart} = useContext(StoreContext)
     const {productId} =useParams();
     
     const [image,setImage]=useState('')
@@ -33,32 +33,28 @@ const ProductDisplay = () => {
       <div className="productdata">
           <div className="product-image">
               <div className="side-img">
-                <img src={image[0]} alt="" />
-                <img src={image[1]} alt="" />
-                <img src={image[2]} alt="" />
-                <img src={image[3]} alt="" />
+                {image?.slice(0,4)?.map((img,i)=>(<img key={i} src={img} alt="" />))}
               </div>
               <div className="main-image">
-                 <img src={image[0]} alt="" />
+                 {image?.[0] && <img src={image[0]} alt="" />}
               </div>
           </div>
           <div className="product-details">
-              <h1>{productData.name}</h1>
+              <h1>{productData.make} {productData.model} {productData.year}</h1>
+              <p className='product-meta'>Chassis: {productData.chassisCode} • Grade: {productData.grade || '—'} • {productData.transmission}</p>
+              <p className='product-meta'>Fuel: {productData.fuel || '—'} • Mileage: {productData.mileage?.toLocaleString?.()} km</p>
               <p>{productData.description}</p>
-              <div className="product-size">
-                {
-                  productData.sizes.map((item,i)=>(
-                    <button onClick={()=>setSizes(item)}><p className={sizes===item ?"selected":""} key={i}>{item}</p></button>
-                     
-                  ))
-                }
+              <p className='price'>Estimated up to LKR {productData.startingPrice?.toLocaleString?.()}</p>
+              <p className='deposit-note'>Deposit required: LKR {productData.depositRequired?.toLocaleString?.()} to proceed with the import process.</p>
+              <div className="contact-block">
+                <p className="contact-text">Questions about this vehicle? Message us on WhatsApp.</p>
+                <a className="contact-button" href="https://wa.me/94775905443" target="_blank" rel="noreferrer">Chat on WhatsApp</a>
               </div>
-              <p className='price'>${productData.price}</p>
-              <button onClick={()=>addToCart(productData._id,sizes)} className="add-to-cart">ADD TO CART</button>
+              <button onClick={()=>addToCart(productData._id)} className="add-to-cart">ADD TO PRE-ORDER CART</button>
               <div className="product-details-detail">
-                  <p>100% Original Product</p>
-                  <p>Cash on delivery is avalible on the product</p>
-                  <p>Easy return and exchange policy within 7 days</p>
+                  <p>Includes original Japanese auction sheet.</p>
+                  <p>We convert navigation to English before handover.</p>
+                  <p>Guided walkthrough of all features at delivery.</p>
               </div>
           </div>
       </div>

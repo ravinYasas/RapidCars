@@ -12,25 +12,28 @@ const stripe = new Strip(process.env.STRIPE_SECRET_KEY)
 //placing orders using COD METHOD
 
 const placeOrder = async (req,res)=>{
-   
-
     try {
-        const {userId,items,amount,address} =req.body;
+        const {userId,items,amount,address,paymentMethod,depositReference,depositAmount} =req.body;
+
+        const method = paymentMethod || "Bank Deposit";
+        const status = method === "Bank Deposit" ? "Awaiting Deposit" : "order placed";
 
         const orderData ={
             userId,
             items,
             amount,
             address,
-            paymentMethod:"COD",
+            paymentMethod:method,
             payment:false,
-            
+            status,
+            depositReference,
+            depositAmount
         }
         const newOrder = new orderModel(orderData)
         await newOrder.save()
 
         await userModel.findByIdAndUpdate(userId,{cartData:{}})
-        res.json({success:true,message:"Order Placed"})
+        res.json({success:true,message: method === 'Bank Deposit' ? "Pre-order placed. Please complete deposit." : "Order Placed"})
     } catch (error) {
         console.log(error);
         res.json({success:false,message:"Error"})

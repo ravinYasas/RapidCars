@@ -26,7 +26,7 @@ const LatestCollection = () => {
         <p className='latest-collection-text'>Fresh arrivals direct from Japan auctions with verified sheets and landed cost guidance.</p>
         <div className="latest-collection-image">
               {latestCollection.map((item,i)=>{
-                 return <Item  key={i} id={item._id} image={item.image} name={item.name} price={item.price}/>
+                      return <Item  key={i} id={item._id} image={item.image} make={item.make} model={item.model} year={item.year} startingPrice={item.startingPrice} grade={item.grade} mileage={item.mileage} transmission={item.transmission} fuel={item.fuel}/>
               })}   
         </div>
 

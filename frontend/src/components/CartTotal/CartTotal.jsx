@@ -5,7 +5,7 @@ import React, { useContext } from 'react'
 
 const CartTotal = () => {
 
-    const {getCartAmount,delivery_fee} = useContext(StoreContext);
+    const {getCartAmount} = useContext(StoreContext);
     
 
   return (
@@ -17,16 +17,17 @@ const CartTotal = () => {
         <div className="cart-payment">
         <div className="total">
             <p>SubTotal</p>
-            <p>${getCartAmount()}.00</p>
+            <p>LKR {getCartAmount()}</p>
         </div>
         <div className="total">
-            <p>Shipping Fee</p>
-            <p className='shiping'> ${delivery_fee}</p>
+            <p>Shipping / Delivery</p>
+            <p className='shiping'>LKR 0 (vehicle shipping charged separately)</p>
         </div>
         <div className="total">
             <b>Total</b>
-            <b className='total-amount'>${getCartAmount() ===0?0:getCartAmount() + delivery_fee}.00</b>
+            <b className='total-amount'>LKR {getCartAmount()}</b>
         </div>
+        <p className="delivery-note">If you wish, we can deliver your car to your doorstep when the shipment arrives; handover typically within 2 months.</p>
         </div>
     </div>
   )

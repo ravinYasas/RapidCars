@@ -1,13 +1,33 @@
 import mongoose from "mongoose";
 
 const clothSchema = new mongoose.Schema({
-    name:{type:String,required:true},
+    // Core vehicle identity
+    make:{type:String,required:true},
+    model:{type:String,required:true},
+    year:{type:Number,required:true},
+    chassisCode:{type:String,required:true},
+    grade:{type:String},
+    mileage:{type:Number},
+    transmission:{type:String},
+    fuel:{type:String},
+    color:{type:String},
+
+    // Pricing & copy
+    startingPrice:{type:Number,required:true},
     description:{type:String,required:true},
-    price:{type:Number,required:true},
+
+    // Media
     image:{type:Array,required:true},
-    category:{type:String,required:true},
-    subCategory:{type:String,required:true},
-    sizes:{type:Array,required:true},
+
+    // Legacy fields kept for compatibility with frontend until fully migrated
+    name:{type:String},
+    price:{type:Number},
+    category:{type:String},
+    subCategory:{type:String},
+    sizes:{type:Array},
+
+    // Meta
+    depositRequired:{type:Number,default:50000},
     date:{type:Number,required:true}
 })
 

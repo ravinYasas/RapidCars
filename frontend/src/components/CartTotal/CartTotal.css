@@ -18,23 +18,22 @@
 
 .total{
     display: flex;
-    margin: 20px;
-    
-    
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    width: 100%;
 }
-.total  p,b{
-    margin-left: 120px;
-    display: flex;
-    
+.total p, .total b{
+    margin: 0;
 }
 .cart-payment{
     justify-content: space-between;
     display: flex;
     flex-direction: column;
 }
-.shiping{
-    margin-left: 90px !important;
-}
-.total-amount{
-    margin-left: 140px !important;
+.delivery-note{
+    margin-top: 16px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
 }

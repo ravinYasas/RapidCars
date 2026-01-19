@@ -1,48 +1,72 @@
 .orders{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 16px;
 }
 
 .order-box{
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 1fr;
+    grid-template-columns: 100px 1fr;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    background: #fff;
 }
 .order-item img{
     width: 100px;
     height: 110px;
-    margin: 8px;
+    object-fit: contain;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    background: #fafafa;
 }
 .order-price{
     display: flex;
-    margin: 10px;
+    align-items: baseline;
+    gap: 6px;
+    margin: 4px 0;
 }
-.order-price p{
-    margin-right: 10px;
+.order-price .label{
+    color: #777;
+    margin: 0;
+}
+.order-price .value{
+    margin: 0;
+    font-weight: 600;
+}
+.vehicle-name{
+    font-weight: 700;
+    margin: 0 0 4px 0;
+}
+.order-name p{
+    margin: 2px 0;
 }
 .order-price-span{
     color: #7a7a7a;
 }
 .orders-status{
     display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
 }
 .dot{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    margin-right: 10px;
-    width: 6px;
-    height: 6px;
-    border-radius: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
     background-color: lightgreen;
 }
 
 .track-order{
-    width: 60%;
-    height: 50%;
-    background-color: #7a7a7a26;
+    justify-self: end;
+    align-self: center;
+    padding: 8px 12px;
+    background-color: #111;
+    color: #fff;
     border: none;
     border-radius: 4px;
-
+    cursor: pointer;
 }
 
 @media (max-width:1250px) {
@@ -53,41 +77,25 @@
 }
 
 @media (max-width:950px) {
+    .order-box{
+        grid-template-columns: 80px 1fr;
+    }
     .order-item img{
         width: 70px;
         height: 80px;
     }
-    .order-box{
-        display: grid;
-        grid-template-columns: 0.5fr 1fr 1fr;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #7a7a7a;
-    }
-    .track-order{
-        margin-bottom: 10px;
-        width: 80%;
-        height: 20px;
-    }
 }
 
 @media (max-width:750px) {
+    .order-box{
+        grid-template-columns: 70px 1fr;
+    }
     .order-item img{
         width: 60px;
         height: 70px;
     }
-    .order-box{
-        display: grid;
-        grid-template-columns:  1fr 1fr;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #7a7a7a;
-    }
     .track-order{
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width: 80%;
-        height: 20px;
-    }
-    .orders-status{
-        margin-top: 10px;
+        justify-self: start;
+        margin-top: 6px;
     }
 }

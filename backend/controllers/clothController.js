@@ -11,7 +11,7 @@ const addCloth = async (req,res)=>{
     //let image_filename =`${req.file.filename}`;
 
     try {
-        const {name,description,price,category,subCategory,sizes}=req.body;
+        const {make,model,year,chassisCode,grade,mileage,transmission,fuel,color,startingPrice,description,depositRequired} = req.body;
         const image1 = req.files.image1 && req.files.image1[0]
         const image2 = req.files.image2 && req.files.image2[0]
         const image3 = req.files.image3 && req.files.image3[0]
@@ -27,13 +27,25 @@ const addCloth = async (req,res)=>{
         )
 
         const clothData ={
-            name,
+            make,
+            model,
+            year:Number(year),
+            chassisCode,
+            grade,
+            mileage:mileage?Number(mileage):undefined,
+            transmission,
+            fuel,
+            color,
+            startingPrice:Number(startingPrice),
             description,
-            category,
-            price:Number(price),
-            subCategory,
-            sizes:JSON.parse(sizes),
             image:imageUrl,
+            depositRequired:depositRequired?Number(depositRequired):50000,
+            // legacy for compatibility
+            name: `${make} ${model} ${year}`,
+            price:Number(startingPrice),
+            category: make,
+            subCategory: model,
+            sizes: [],
             date:Date.now()
         }
         const cloth = new  clothModel(clothData);
@@ -85,50 +97,75 @@ const singleCloth = async (req,res)=>{
         res.json({success:false,message:error.message})
     }
 }
-//update colth 
-
+// update vehicle / cloth
 const updateCloth = async (req,res)=>{
-    
-
-    const {id,name,description,category,subCategory,sizes,price}=req.body;
-    let  image_filename;
-
-    if (req.file) {
-        image_filename=`${req.file.filename}`
-    }
-
     try {
+        const {
+            id,
+            make,
+            model,
+            year,
+            chassisCode,
+            grade,
+            mileage,
+            transmission,
+            fuel,
+            color,
+            startingPrice,
+            description,
+            depositRequired
+        } = req.body;
 
-        //Find the existing clothing item
         const cloth = await clothModel.findById(id);
         if (!cloth) {
-            return res.json({success:false,message:"Clothing item not found"})
+            return res.json({success:false,message:"Vehicle not found"})
         }
-        
 
-        const updateCloth = await clothModel.findByIdAndUpdate(
-            id,{
-                name,
-                description,
-                category,
-                subCategory,
-                sizes,price,dates,
-                ...(image_filename && {image:image_filename}),
+        // handle optional new images
+        const image1 = req.files?.image1?.[0];
+        const image2 = req.files?.image2?.[0];
+        const image3 = req.files?.image3?.[0];
+        const image4 = req.files?.image4?.[0];
+        const images = [image1,image2,image3,image4].filter(Boolean);
+
+        let imageUrl = cloth.image;
+        if (images.length > 0) {
+            imageUrl = await Promise.all(
+                images.map(async (item)=>{
+                   const result = await cloudinary.uploader.upload(item.path,{resource_type:'image'});
+                   return result.secure_url
+                })
+            )
+        }
+
+        const updated = await clothModel.findByIdAndUpdate(
+            id,
+            {
+                ...(make && {make}),
+                ...(model && {model}),
+                ...(year && {year:Number(year)}),
+                ...(chassisCode && {chassisCode}),
+                ...(grade && {grade}),
+                ...(mileage && {mileage:Number(mileage)}),
+                ...(transmission && {transmission}),
+                ...(fuel && {fuel}),
+                ...(color && {color}),
+                ...(startingPrice && {startingPrice:Number(startingPrice), price:Number(startingPrice)}),
+                ...(description && {description}),
+                ...(depositRequired && {depositRequired:Number(depositRequired)}),
+                image:imageUrl,
+                // legacy fields
+                name: `${make || cloth.make} ${model || cloth.model} ${year || cloth.year}`.trim(),
+                category: make || cloth.make,
+                subCategory: model || cloth.model,
             },
             {new:true}
         );
 
-        if (!updateCloth) {
-            return res.json({success:false,message:"Clothe items not found"})
-        }
-        if (image_filename &&cloth.image) {
-            fs.unlink(`upload/${cloth.image}`,()=>{})
-        }
-            
-        res.json({success:true,message:"Cloth Updated",data:updateCloth})
+        res.json({success:true,message:"Vehicle updated",data:updated})
     } catch (error) {
         console.log(error);
-        res.json({success:false,message:"Error updating Cloth Item"})
+        res.json({success:false,message:error.message || "Error updating vehicle"})
     }
 
 }

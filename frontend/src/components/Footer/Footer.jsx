@@ -25,9 +25,9 @@ const Footer = () => {
         <div className="footer-right">
           <h2>GET IN TOUCH</h2>
             <ul>
-                   <li>+94 71 000 0000</li>
+                   <li>+94 77 590 5443</li>
                    <li>hello@rapidcars.com</li>
-                   <li>Colombo • Japan direct sourcing</li>
+                   <li>No.48/E Wataddara, Veyangoda, Gampaha, Sri Lanka</li>
             </ul>
         </div>
     </div>

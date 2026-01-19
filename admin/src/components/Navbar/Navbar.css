@@ -8,9 +8,18 @@
     display: flex;
           
 }
+.logo-stack{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 .logo{
-    width: 100px;
-    height: 40px;
+    width: 120px;
+    height: auto;
+}
+.secondary-logo{
+    width: 120px;
+    height: auto;
 }
 
 .profile{
@@ -42,9 +51,9 @@
 }
 
 @media (max-width:750px) {
-    .logo{
-        width: 80px;
-        height: 25px;
+    .logo,
+    .secondary-logo{
+        width: 90px;
     }
     .navbar-option img{
         width: 20px;

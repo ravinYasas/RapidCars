@@ -6,16 +6,32 @@ import { StoreContext } from '../../context/StoreContext.jsx';
 
 import './Checkout.css'
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 
 
 const Checkout = () => {
-    const { backendUrl,token,cartItem,setCartAmount,setCartItems,products,getCartAmount,delivery_fee } = useContext(StoreContext) 
+    const { backendUrl,token,cartItem,setCartItems,products,getCartAmount } = useContext(StoreContext) 
     const navigate =useNavigate();
-    const [method ,setMethod] = useState('cod');
+    const [depositRef ,setDepositRef] = useState('');
+
+    const depositAmount = useMemo(()=>{
+        let total = 0;
+        for(const itemId in cartItem){
+            for(const size in cartItem[itemId]){
+                const qty = cartItem[itemId][size];
+                if (qty > 0) {
+                    const itemInfo = products.find(p=>p._id === itemId);
+                    if (itemInfo) {
+                        total += (itemInfo.depositRequired || 50000) * qty;
+                    }
+                }
+            }
+        }
+        return total || 50000;
+    },[cartItem,products]);
 
     const [formData,setFormData] =useState({
         firstName:'',
@@ -57,41 +73,24 @@ const Checkout = () => {
                 let orderData ={
                     address:formData,
                     items:orderItems,
-                    amount:getCartAmount() +delivery_fee
+                    amount:getCartAmount(),
+                    paymentMethod:'Bank Deposit',
+                    depositReference:depositRef,
+                    depositAmount: depositAmount
                 }
                 
-                switch (method) {
-                    case 'cod':
-                        const response = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}})
-                       
-                       
-                        if (response.data.success) {
-                            setCartItems({})
-                            navigate('/myorders')
-                            toast.success(response.data.message)
-                        } else {
-                            toast.error(response.data.message  )
-                        }
-
-                        break;
-                    
-                    case 'stripe':
-                        const responseStripe = await axios.post(backendUrl+'/api/order/stripe',orderData,{headers:{token}})
-                        if (responseStripe.data.success) {
-                            const {session_url} =responseStripe.data
-                            window.location.replace(session_url)
-                            toast.success(response.data.message)
-                        }else{
-                            toast.error(responseStripe.data.message)
-                        }
-
-                        break;
-                    default:
-                        break;
+                const response = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}})
+                
+                if (response.data.success) {
+                    setCartItems({})
+                    navigate('/myorders')
+                    toast.success(response.data.message)
+                } else {
+                    toast.error(response.data.message  )
                 }
                 
             } catch (error) {
-                
+                toast.error(error.message)
             }
     }
 
@@ -126,25 +125,18 @@ const Checkout = () => {
         
         <div className="cart-right">
               <CartTotal/>
-            <div className="payment-type">
-                <div onClick={()=>setMethod('stripe')} className="stripe">
-                    <p className={`${method === 'stripe'?'select':''}`} > </p>
-                    <img className='border' src={assets.stripe_logo} alt=""  />
-                    <p className={`${method === 'stripe'?'select':''}`} > </p>
-                </div>
-                <div onClick={()=>setMethod('razorpay')} className="razorpay">
-                    <p className={`${method === 'razorpay'?'select':''}`}></p>
-                    <img className='border' src={assets.razorpay_logo} alt="" />
-                    <p className={`${method === 'razorpay'?'select':''}`} > </p>
-                </div>
-                <div onClick={()=>setMethod('cod')} className="cod">
-                    <p className={`${method === 'cod'?'select':''}`}></p>
-                    <p className='border'>Cash ON DELIVERY</p>
-                    <p className={`${method === 'cod'?'select':''}`} > </p>
-                </div>
+            <div className="payment-type deposit-box">
+                <h3>Bank Deposit (Required)</h3>
+                <p>Deposit LKR {depositAmount.toLocaleString('en-LK')} to proceed with vehicle import.</p>
+                <p>Account Name: Rapid Cars</p>
+                <p>Bank: HNB Bank</p>
+                <p>Branch: Thimbirigasyaya</p>
+                <p>Account No: 092020023628</p>
+                <p className='muted'>Use your name and phone as reference. Enter the deposit reference below.</p>
+                <input id='input-fields' name='depositRef' onChange={(e)=>setDepositRef(e.target.value)} value={depositRef} className='cart-personal' type="text" placeholder='Bank deposit reference number' required />
             </div>
       
-        <button type='submit' >PLACE ORDER</button>
+        <button type='submit' >CONFIRM PRE-ORDER</button>
         </div>
     </div>
     

@@ -71,12 +71,8 @@ const Cart = () => {
         </div>
         <CartTotal/>
         <hr />
-        <div className="coupen">
-            <div className="add-coupen">
-                <input type="text" />
-                <button>ADD Coupen</button>
-            </div>
-            <button onClick={()=>navigate('/checkout')} className='checkouts'>Checkout</button>
+        <div className="checkout-actions">
+          <button onClick={()=>navigate('/checkout')} className='checkouts'>Checkout</button>
         </div>
     </div>
   )

@@ -11,7 +11,10 @@ const Navbar = ({setToken}) => {
   return (
     <div className='navbar-content'>
       
-      <img className='logo' src={assets.logo} alt="" srcSet="" />
+      <div className="logo-stack">
+        <img className='logo' src={assets.logo} alt="Rapid Cars" />
+        <img className='logo secondary-logo' src={assets.logo_png} alt="Rapid Cars" />
+      </div>
       <hr />
       
       <div className="navbar-details">

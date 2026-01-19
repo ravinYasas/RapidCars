@@ -12,16 +12,27 @@ const Navbar = ({setShowLogin}) => {
     const [isOpen,setIsOpen] = useState(false);
     const [isSOpen,setIsSOpen] =useState(false)
     const {search,setSearch,setCartItems,setVisible,getCartCount,token,setToken} =useContext(StoreContext);
-    const loaction =useLocation();
+    const location =useLocation();
 
     useEffect(()=>{
-        if (location.pathname.includes('collection') && isSOpen) {
+        const path = location.pathname;
+        if (path.startsWith('/collection')) {
+            setMenu('collection');
+        } else if (path.startsWith('/about')) {
+            setMenu('about');
+        } else if (path.startsWith('/contact')) {
+            setMenu('contact');
+        } else {
+            setMenu('home');
+        }
+
+        if (path.includes('collection') && isSOpen) {
             setVisible(true);
-        }else{
+        } else {
             setVisible(false)
         }
         
-    },[loaction])
+    },[location.pathname,isSOpen,setVisible])
 
     const logout =()=>{
         localStorage.removeItem("token");
@@ -34,12 +45,14 @@ const Navbar = ({setShowLogin}) => {
   return (
     <div className="navbar-container">
     <div className='navbar'>
-        
-        <Link to='/' ><img src={assets.logo} alt=""  className='logo' /></Link>
+                <Link to='/' className='brand'>
+                    <img src={assets.logo} alt="Rapid Cars logo"  className='logo' />
+                    <span className='brand-text'>Cars</span>
+                </Link>
                         
         <ul className={`navbar-menu ${isOpen?"active":""}`}>         
             <li onClick={()=>{setMenu("home")}}><Link to='/'  >HOME</Link>{menu==="home"?<hr/>:<></>}</li>
-            <li onClick={()=>{setMenu("collection")}}> <Link to='/collection' >INVENTORY</Link>{menu==="collection"?<hr/>:<></>}</li>
+            <li onClick={()=>{setMenu("collection")}}> <Link to='/collection' >PRE-ORDER</Link>{menu==="collection"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("about")}}><Link to='/about' >ABOUT</Link>{menu==="about"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("contact")}}><Link to='/contact' >CONTACT</Link>{menu==="contact"?<hr/>:<></>}</li>                   
         </ul>

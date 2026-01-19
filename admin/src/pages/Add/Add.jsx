@@ -10,12 +10,18 @@ const Add = ({token}) => {
   const [image3, setImage3] = useState(false);
   const [image4, setImage4] = useState(false);
 
-  const [name,setName] =useState("");
+  const [make,setMake] =useState("");
+  const [model,setModel] =useState("");
+  const [year,setYear] =useState("");
+  const [chassisCode,setChassisCode] =useState("");
+  const [grade,setGrade] =useState("");
+  const [mileage,setMileage] =useState("");
+  const [transmission,setTransmission] =useState("");
+  const [fuel,setFuel] =useState("");
+  const [color,setColor] =useState("");
+  const [startingPrice,setStartingPrice] =useState("");
   const [description,setDescription] =useState("");
-  const [price,setPrice] =useState("");
-  const [category,setCategory] =useState("relevant");
-  const [subCategory,setSubCategory]=useState("relevant");
-  const  [sizes,setSizes] =useState([]);
+  const [depositRequired,setDepositRequired] =useState(50000);
 
 
 
@@ -25,12 +31,18 @@ const Add = ({token}) => {
     try {
       const formData = new FormData()
 
-      formData.append("name",name)
+      formData.append("make",make)
+      formData.append("model",model)
+      formData.append("year",year)
+      formData.append("chassisCode",chassisCode)
+      formData.append("grade",grade)
+      formData.append("mileage",mileage)
+      formData.append("transmission",transmission)
+      formData.append("fuel",fuel)
+      formData.append("color",color)
+      formData.append("startingPrice",startingPrice)
       formData.append("description",description)
-      formData.append("price",price)
-      formData.append("category",category)
-      formData.append("subCategory",subCategory)
-      formData.append("sizes",JSON.stringify(sizes))
+      formData.append("depositRequired",depositRequired)
 
       image1 && formData.append("image1",image1)
       image2 && formData.append("image2",image2)
@@ -41,13 +53,22 @@ const Add = ({token}) => {
       
       if (response.data.success) {
         toast.success(response.data.message)
-        setName('')
+        setMake('')
+        setModel('')
+        setYear('')
+        setChassisCode('')
+        setGrade('')
+        setMileage('')
+        setTransmission('')
+        setFuel('')
+        setColor('')
+        setStartingPrice('')
         setDescription('')
         setImage1(false)
         setImage2(false)
         setImage3(false)
         setImage4(false)
-        setPrice('')
+        setDepositRequired(50000)
       }else{
         toast.error(response.data.message)
       }
@@ -86,70 +107,58 @@ const Add = ({token}) => {
 
             </div>
             <div className="add-product-name flex-col">
-              <p className='topic'>Product name</p>
-              <input onChange={(e)=>setName(e.target.value)} value={name} type="text" name='name' placeholder='Your name ' required />
+              <p className='topic'>Make</p>
+              <input onChange={(e)=>setMake(e.target.value)} value={make} type="text" name='make' placeholder='e.g., Toyota' required />
             </div>
-
+            <div className="add-product-name flex-col">
+              <p className='topic'>Model</p>
+              <input onChange={(e)=>setModel(e.target.value)} value={model} type="text" name='model' placeholder='e.g., Axio' required />
+            </div>
+            <div className="add-product-name flex-col">
+              <p className='topic'>Year</p>
+              <input onChange={(e)=>setYear(e.target.value)} value={year} type="number" name='year' placeholder='e.g., 2018' required />
+            </div>
+            <div className="add-product-name flex-col">
+              <p className='topic'>Chassis Code</p>
+              <input onChange={(e)=>setChassisCode(e.target.value)} value={chassisCode} type="text" name='chassisCode' placeholder='e.g., NZE161' required />
+            </div>
+            <div className="add-product-name flex-col">
+              <p className='topic'>Grade / Trim</p>
+              <input onChange={(e)=>setGrade(e.target.value)} value={grade} type="text" name='grade' placeholder='e.g., G Limited' />
+            </div>
+            <div className="add-product-name flex-col">
+              <p className='topic'>Mileage (km)</p>
+              <input onChange={(e)=>setMileage(e.target.value)} value={mileage} type="number" name='mileage' placeholder='e.g., 45000' />
+            </div>
+            <div className="add-product-name flex-col">
+              <p className='topic'>Transmission</p>
+              <input onChange={(e)=>setTransmission(e.target.value)} value={transmission} type="text" name='transmission' placeholder='e.g., Automatic' />
+            </div>
+            <div className="add-product-name flex-col">
+              <p className='topic'>Fuel</p>
+              <input onChange={(e)=>setFuel(e.target.value)} value={fuel} type="text" name='fuel' placeholder='e.g., Petrol / Hybrid' />
+            </div>
+            <div className="add-product-name flex-col">
+              <p className='topic'>Color</p>
+              <input onChange={(e)=>setColor(e.target.value)} value={color} type="text" name='color' placeholder='e.g., Pearl White' />
+            </div>
             <div className="add-product-description flex-col">
-              <p className='topic'>Product Description</p>
-              <textarea onChange={(e)=>setDescription(e.target.value)} value={description} name="description" rows="6" placeholder='Enter details Product' required></textarea>
+              <p className='topic'>Vehicle Description</p>
+              <textarea onChange={(e)=>setDescription(e.target.value)} value={description} name="description" rows="6" placeholder='Key options, auction notes, and condition highlights' required></textarea>
             </div>
           </div>
           <div className="add-right">
-            <div className="category-details flex-col">
-              <p className='topic category'>Category</p>
-              <div className="category-content">
-                <div className="category">
-                  <p className='topic'>Product Category</p>
-                  <select onChange={(e)=>setCategory(e.target.value)} value={category} name="category" id='Category' required >
-                    <option value="relevant">relevant</option>
-                    <option value="Men">Men</option>
-                    <option value="Women">Women</option>
-                    <option value="Kids">Kids</option>
-                  </select>
-                </div>
-                <div className="subCategory">
-                  <p className='topic'>Product SubCategory</p>
-                  <select onChange={(e)=>setSubCategory(e.target.value)} value={subCategory} name="subCategory" id="Category" required>
-                    <option value="relevant">relevant</option>
-                    <option value="Topwear">Topwear</option>
-                    <option value="Bottomwear">Bottomwear</option>
-                    <option value="Winterwear">Winterwear</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
             <div className="add-category-price flex-col">
               <div className="add-price">
-                <p className='topic'>Product Price </p>
-                <input onChange={(e)=>setPrice(e.target.value)} type="Number" value={price} name='price' placeholder='20$' required />
+                <p className='topic'>Starting Price (LKR)</p>
+                <input onChange={(e)=>setStartingPrice(e.target.value)} type="Number" value={startingPrice} name='startingPrice' placeholder='e.g., 3500000' required />
+              </div>
+              <div className="add-price">
+                <p className='topic'>Deposit Required (LKR)</p>
+                <input onChange={(e)=>setDepositRequired(e.target.value)} type="Number" value={depositRequired} name='depositRequired' placeholder='50000' required />
               </div>
               </div>
-              <div className="add-sizes">
-                <p className='topic'>Product Sizes</p>
-              </div>
-              <div className="sizes">
-                <div onClick={() => setSizes(prev => prev.includes("S") ? prev.filter( item => item !== "S"): [...prev,"S"])} className='size-box'>
-                  <p className={`${sizes.includes("S")?"size-bar":"unselect"}`}>S</p>
-                </div>
-                <div onClick={()=>setSizes(prev=>prev.includes("M") ? prev.filter(item =>item !== "M") : [...prev,"M"])} className='size-box'>
-                  <p className={`${sizes.includes("M")?"size-bar":"unselect"}`} >M</p>
-                </div>
-                <div onClick={()=>setSizes(prev=>prev.includes("L") ? prev.filter(item =>item !== "L") : [...prev,"L"])} className='size-box'>
-                  <p className={`${sizes.includes("L")?"size-bar":"unselect"}`}>L</p>
-                </div>
-                <div onClick={()=>setSizes(prev=>prev.includes("XL") ? prev.filter(item =>item !== "XL") : [...prev,"XL"])} className='size-box'>
-                  <p className={`${sizes.includes("XL")?"size-bar":"unselect"}`}>XL</p>
-                </div>
-                <div onClick={()=>setSizes(prev=>prev.includes("XXL") ? prev.filter(item =>item !== "XXL") : [...prev,"XXL"])} className='size-box' >
-                  <p className={`${sizes.includes("XXL")?"size-bar":"unselect"}`}>XXL</p>
-                </div>
-              
-
-
-            </div>
-            <button type='submit' className='add-btn'>Add</button>
+            <button type='submit' className='add-btn'>Add Vehicle</button>
           </div>
           
         </div>
