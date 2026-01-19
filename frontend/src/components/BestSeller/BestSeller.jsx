@@ -23,7 +23,7 @@ const BestSeller = () => {
             <p>Best <span>Seller</span> </p>
             <p className='bestSeller-bar'></p>
             </div>
-            <p className='bestSeller-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, laboriosam.</p>
+          <p className='bestSeller-text'>Customer-favorite imports with clear option breakdowns and ready-for-delivery conversions.</p>
          
          <div className="bestSeller-container">
             {bestSELLER.map((item,i)=>{

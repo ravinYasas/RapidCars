@@ -9,13 +9,20 @@ const Header = () => {
         <div className="header-left">
             <div className="header-title">
                 <div className='header-line'></div>
-                <p>OUR BESTSELLERS</p>
+                <p>RAPID CARS • JAPAN DIRECT</p>
             </div>
             <div className='header-main' >
-                <h2>Latest Arrivals</h2></div>
-            
+                <h2>More Than Just Vehicle Imports</h2>
+                <p className="header-subtitle">We deliver trust from Japan with a transparent, step-by-step pre-ordering experience you can follow from auction to handover.</p>
+            </div>
+            <ul className="header-list">
+              <li>Direct imports with original Japanese auction sheets</li>
+              <li>LC can be opened in your name for full financial clarity</li>
+              <li>Trim, options, and pricing explained with no hidden costs</li>
+              <li>Japanese systems converted to English and features demonstrated</li>
+            </ul>
             <div className='header-button'>
-                <button>SHOP NOW</button>
+                <button>Start Your Import</button>
                  <div className="header-line"></div>
             </div>
         </div>

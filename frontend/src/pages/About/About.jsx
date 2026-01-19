@@ -15,27 +15,19 @@ const About = () => {
         </div>
         <div className="about-middle">
           <img src={assets.about_img} alt="" />
-          <p>
-          <p className="about-paragraph">
-            Forever was born out of a passion for innovation and a desire to
-            revolutionize the way people shop online. Our journey began with a
-            simple idea: to provide a platform where customers can easily
-            discover, explore, and purchase a wide range of products from the
-            comfort of their homes. </p>
+          <div className="about-text">
             <p className="about-paragraph">
-            Since our inception, we've worked tirelessl to curate a diverse selection of high-quality products that cater to
-            every taste and preference. From fashion and beauty to electronics
-            and home essentials, we offer an extensive collection sourced from
-            trusted brands and suppliers.
+              Rapid Cars exists to make Japanese vehicle imports clear, predictable, and honest. We manage the entire journey from auction to handover with full transparency, so buying a vehicle never feels confusing or risky.
             </p>
             <p className="about-paragraph">
-            <span> Our Mission </span>
-            <br />
-            Our mission at Forever is to empower customers with choice, convenience, and confidence. We're
-            dedicated to providing a seamless shopping experience that exceeds
-            expectations, from browsing and ordering to delivery and beyond.
-          </p>
-          </p>
+              You see the original auction sheets, understand trims and options, and get an exact price breakdown with no hidden costs. We open LC in your name, convert in-car systems to English, and guide you through every feature before you drive away.
+            </p>
+            <p className="about-paragraph">
+              <span>Our Mission</span>
+              <br />
+              Deliver trust-first vehicle imports from Japan by combining transparency, technical guidance, and long-term customer care.
+            </p>
+          </div>
         </div>
       </div>
       <div className="about-down">
@@ -45,16 +37,16 @@ const About = () => {
         </div>
         <div className="about-down-box">
           <div className="about-down-box-container">
-            <h4>QUALITY  ASSURANCE:</h4>
-            <p>We meticulously select and vet each product to ensure it meets our stringent quality standards.</p>
+            <h4>TRANSPARENT AUCTION DATA</h4>
+            <p>Original Japanese auction sheets, verified mileage, and condition reports for every vehicle.</p>
           </div>
           <div className="about-down-box-container">
-            <h4>CONVENIENCE:</h4>
-            <p>With our user-friendly interface and hassle-free ordering process, shopping has never been easier.</p>
+            <h4>LC IN YOUR NAME</h4>
+            <p>Financial clarity with LC opened directly in your name and a clear landed-cost breakdown.</p>
           </div>
           <div className="about-down-box-container">
-            <h4>EXCEPTIONAL CUSTOMER SERVICES:</h4>
-            <p>Our team of dedicated professionals is here to assist you the way, ensuring your satisfaction is our top priority.</p>
+            <h4>DELIVERY-READY HANDOVER</h4>
+            <p>English conversions, feature walkthroughs, and ongoing support to keep you confident on every drive.</p>
           </div>
         </div>
       </div>

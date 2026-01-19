@@ -7,18 +7,18 @@ const ProvideService = () => {
     <div className='provideService-container'>
         <div className="provideService-box">
             <img src={assets.exchange_icon} alt="" />
-            <h4>Exchange Policy</h4>
-            <p>We offer hassle free echange offer</p>
+        <h4>Auction-Grade Transparency</h4>
+        <p>Original Japanese auction sheets and condition reports for every vehicle.</p>
         </div>
         <div className="provideService-box">
             <img src={assets.quality_icon} alt="" />
-            <h4>7 days  return policy</h4>
-            <p>we provide 7 days free return ploicy</p>
+        <h4>LC In Your Name</h4>
+        <p>Open LC directly in your name for full financial clarity and control.</p>
         </div>
         <div className="provideService-box">
             <img src={assets.support_img} alt="" />
-            <h4>Best Customer Supoort</h4>
-            <p>We provide 24/7 customer support</p>
+        <h4>Ready For The Road</h4>
+        <p>English conversion and full feature walkthrough before you take delivery.</p>
         </div>
     </div>
   )

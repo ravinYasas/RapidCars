@@ -23,6 +23,10 @@
     align-items: start;
     gap: 20px;
 }
+.footer-logo-small{
+    width: 140px;
+    height: auto;
+}
 .footer-center li ,.footer-right li{
     list-style: none;
     margin-bottom: 10px;

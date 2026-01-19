@@ -10,29 +10,30 @@ const Footer = () => {
     <div className="footer">
     <div className='footer-content'>
         <div className="footer-left">
-            <img src={assets.logo} alt="" />
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus quasi officia laborum assumenda excepturi corporis cumque necessitatibus, mollitia deleniti voluptate. Tempora vitae sunt excepturi rem accusamus nemo fuga molestias fugit!</p>
+          <img className="footer-logo-small" src={assets.logo} alt="Rapid Cars logo" />
+          <p>Rapid Cars delivers direct vehicle imports from Japan with full transparency. We guide you from auction sheet to handover with clear pricing, LC in your name, and every feature explained so you can drive away with confidence.</p>
         </div>
         <div className="footer-center">
-            <h2>COMPANY</h2>
+                <h2>COMPANY</h2>
             <ul >
-              <li>Home</li>
-              <li>About us</li>
-              <li>Delivery</li>
-              <li>Privancy policy</li>
+                  <li>Home</li>
+                  <li>About Rapid Cars</li>
+                  <li>Pre-order Guide</li>
+                  <li>Transparency Policy</li>
             </ul>
         </div>
         <div className="footer-right">
           <h2>GET IN TOUCH</h2>
             <ul>
-               <li>+1-212-456-7890</li>
-               <li>kavishka@gmail.com</li>
+                   <li>+94 71 000 0000</li>
+                   <li>hello@rapidcars.com</li>
+                   <li>Colombo • Japan direct sourcing</li>
             </ul>
         </div>
     </div>
     <hr />
     <p className="footer-copyright">
-        Copyright 2024 @forever.com - All  Right Reserved
+        Rapid Cars © 2026 — All rights reserved
     </p>
     </div>
     </>

@@ -10,8 +10,8 @@ const Description = () => {
             <p>Reviews(122)</p>
         </div>
         <div className="description-details">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed voluptatem voluptas eaque maiores quasi cumque voluptates tempora dolorum blanditiis cupiditate.</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde doloribus iusto quae molestias animi corporis?</p>
+          <p>Every Rapid Cars listing includes the original Japanese auction sheet, verified mileage, and a transparent landed-cost breakdown. We explain trim, options, and service history so you know exactly what you are importing.</p>
+          <p>Before handover we convert the navigation and key systems to English, then walk you through every feature to ensure you are confident with your new vehicle.</p>
         </div>
     </div>
   )

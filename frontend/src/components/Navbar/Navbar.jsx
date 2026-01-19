@@ -39,7 +39,7 @@ const Navbar = ({setShowLogin}) => {
                         
         <ul className={`navbar-menu ${isOpen?"active":""}`}>         
             <li onClick={()=>{setMenu("home")}}><Link to='/'  >HOME</Link>{menu==="home"?<hr/>:<></>}</li>
-            <li onClick={()=>{setMenu("collection")}}> <Link to='/collection' >COLLECTION</Link>{menu==="collection"?<hr/>:<></>}</li>
+            <li onClick={()=>{setMenu("collection")}}> <Link to='/collection' >INVENTORY</Link>{menu==="collection"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("about")}}><Link to='/about' >ABOUT</Link>{menu==="about"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("contact")}}><Link to='/contact' >CONTACT</Link>{menu==="contact"?<hr/>:<></>}</li>                   
         </ul>

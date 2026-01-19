@@ -10,11 +10,11 @@ const Subcribe = () => {
 
   return (
     <div className='subcribe-container'>
-        <h2>Subcribe Now & get 20% off</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo, ex.</p>
+        <h2>Get auction alerts and landing costs</h2>
+        <p>Be first to see Japan auction picks, price breakdowns, and handover timelines.</p>
         <div className="subcribe-box" onSubmit={onSubmitHandler} >
             <input type="email" />
-            <button>SUBCRIBE</button>
+            <button>SUBSCRIBE</button>
         </div>
     </div>
   )
