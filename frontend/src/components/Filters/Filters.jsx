@@ -6,15 +6,26 @@ import React, { useContext, useMemo, useState } from 'react'
 const Filters = () => {
 
   const [isOpen,setIsOpen] =useState(false);
-  const {makeFilters,modelFilters,yearFilters,chassisFilters,toggleMake,toggleModel,toggleYear,toggleChassis,products} =useContext(StoreContext)
+  const {makeFilters,modelFilters,yearFilters,chassisFilters,toggleMake,toggleModel,toggleYear,toggleChassis,products,setModelFilters,setMakeFilters,setYearFilters,setChassisFilters} =useContext(StoreContext)
 
   const options = useMemo(()=>{
     const makes = Array.from(new Set(products.map(p=>p.make).filter(Boolean)));
-    const models = Array.from(new Set(products.map(p=>p.model).filter(Boolean)));
-    const years = Array.from(new Set(products.map(p=>String(p.year)).filter(Boolean)));
-    const chassis = Array.from(new Set(products.map(p=>p.chassisCode).filter(Boolean)));
+
+    const filteredByMake = makeFilters.length
+      ? products.filter(p=>makeFilters.includes(p.make))
+      : products;
+
+    const models = Array.from(new Set(filteredByMake.map(p=>p.model).filter(Boolean)));
+
+    const filteredByModel = modelFilters.length
+      ? filteredByMake.filter(p=>modelFilters.includes(p.model))
+      : filteredByMake;
+
+    const years = Array.from(new Set(filteredByModel.map(p=>String(p.year)).filter(Boolean)));
+    const chassis = Array.from(new Set(filteredByModel.map(p=>p.chassisCode).filter(Boolean)));
+
     return {makes,models,years,chassis};
-  },[products])
+  },[products,makeFilters,modelFilters])
 
   return (
     <div className='filters-container'>
@@ -24,7 +35,13 @@ const Filters = () => {
             <p>Make</p>
             <ul className="categories-checkbox">
               {options.makes.map(make=>(
-                <li key={make}><input type="checkbox" value={make} onChange={toggleMake} checked={makeFilters.includes(make)} readOnly/> {make}</li>
+                <li key={make}><input type="checkbox" value={make} onChange={(e)=>{
+                  const next = e.target.checked ? [make] : [];
+                  setMakeFilters(next);
+                  setModelFilters([]);
+                  setChassisFilters([]);
+                  setYearFilters([]);
+                }} checked={makeFilters.includes(make)} /> {make}</li>
               ))}
             </ul>           
         </div>
@@ -32,7 +49,7 @@ const Filters = () => {
             <p>Model</p>
             <ul className="categories-checkbox">
             {options.models.map(model=>(
-              <li key={model}><input type="checkbox" value={model} onChange={toggleModel} checked={modelFilters.includes(model)} readOnly/> {model}</li>
+              <li key={model}><input type="checkbox" value={model} onChange={(e)=>setModelFilters(e.target.checked?[model]:[])} checked={modelFilters.includes(model)} /> {model}</li>
             ))}
             </ul>
         </div>
