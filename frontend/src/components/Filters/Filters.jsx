@@ -24,7 +24,7 @@ const Filters = () => {
             <p>Make</p>
             <ul className="categories-checkbox">
               {options.makes.map(make=>(
-                <li key={make}><input type="checkbox" value={make} onChange={toggleMake}/> {make}</li>
+                <li key={make}><input type="checkbox" value={make} onChange={toggleMake} checked={makeFilters.includes(make)} readOnly/> {make}</li>
               ))}
             </ul>           
         </div>
@@ -32,7 +32,7 @@ const Filters = () => {
             <p>Model</p>
             <ul className="categories-checkbox">
             {options.models.map(model=>(
-              <li key={model}><input type="checkbox" value={model} onChange={toggleModel}/> {model}</li>
+              <li key={model}><input type="checkbox" value={model} onChange={toggleModel} checked={modelFilters.includes(model)} readOnly/> {model}</li>
             ))}
             </ul>
         </div>
@@ -40,7 +40,7 @@ const Filters = () => {
             <p>Year</p>
             <ul className="categories-checkbox">
             {options.years.map(year=>(
-              <li key={year}><input type="checkbox" value={year} onChange={toggleYear}/> {year}</li>
+              <li key={year}><input type="checkbox" value={year} onChange={toggleYear} checked={yearFilters.includes(year)} readOnly/> {year}</li>
             ))}
             </ul>
         </div>
@@ -48,7 +48,7 @@ const Filters = () => {
             <p>Chassis Code</p>
             <ul className="categories-checkbox">
             {options.chassis.map(code=>(
-              <li key={code}><input type="checkbox" value={code} onChange={toggleChassis}/> {code}</li>
+              <li key={code}><input type="checkbox" value={code} onChange={toggleChassis} checked={chassisFilters.includes(code)} readOnly/> {code}</li>
             ))}
             </ul>
         </div>

@@ -27,8 +27,41 @@
 .categories-checkbox li{
     margin-top: 8px;
     font-size: 14px;
-    
-    
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.categories-checkbox input[type="checkbox"]{
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1.6px solid var(--border);
+    border-radius: 4px;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.categories-checkbox input[type="checkbox"]:checked{
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.categories-checkbox input[type="checkbox"]::after{
+    content: "";
+    width: 8px;
+    height: 4px;
+    border: 2px solid #fff;
+    border-top: 0;
+    border-right: 0;
+    transform: rotate(-45deg);
+    opacity: 0;
+}
+
+.categories-checkbox input[type="checkbox"]:checked::after{
+    opacity: 1;
 }
 
 @media (max-width:980px) {
