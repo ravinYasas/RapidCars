@@ -34,6 +34,8 @@ const Navbar = ({setShowLogin}) => {
         
     },[location.pathname,isSOpen,setVisible])
 
+    const closeMenu = () => setIsOpen(false);
+
     const logout =()=>{
         localStorage.removeItem("token");
         setToken("");
@@ -51,10 +53,10 @@ const Navbar = ({setShowLogin}) => {
                 </Link>
                         
         <ul className={`navbar-menu ${isOpen?"active":""}`}>         
-            <li onClick={()=>{setMenu("home")}}><Link to='/'  >HOME</Link>{menu==="home"?<hr/>:<></>}</li>
-            <li onClick={()=>{setMenu("collection")}}> <Link to='/collection' >PRE-ORDER</Link>{menu==="collection"?<hr/>:<></>}</li>
-            <li onClick={()=>{setMenu("about")}}><Link to='/about' >ABOUT</Link>{menu==="about"?<hr/>:<></>}</li>
-            <li onClick={()=>{setMenu("contact")}}><Link to='/contact' >CONTACT</Link>{menu==="contact"?<hr/>:<></>}</li>                   
+            <li onClick={()=>{setMenu("home"); closeMenu();}}><Link to='/'  >HOME</Link>{menu==="home"?<hr/>:<></>}</li>
+            <li onClick={()=>{setMenu("collection"); closeMenu();}}> <Link to='/collection' >PRE-ORDER</Link>{menu==="collection"?<hr/>:<></>}</li>
+            <li onClick={()=>{setMenu("about"); closeMenu();}}><Link to='/about' >ABOUT</Link>{menu==="about"?<hr/>:<></>}</li>
+            <li onClick={()=>{setMenu("contact"); closeMenu();}}><Link to='/contact' >CONTACT</Link>{menu==="contact"?<hr/>:<></>}</li>                   
         </ul>
         
         <div className="navbar-right">

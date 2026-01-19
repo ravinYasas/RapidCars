@@ -3,6 +3,7 @@
     flex-direction: column;
     margin-top: 50px;
     align-items: center;
+    gap: 12px;
 }
 .cart-topic-text{
     display: flex;
@@ -22,6 +23,7 @@
     align-items: center;
     margin: 12px 0;
     width: 100%;
+    gap: 10px;
 }
 .total p, .total b{
     margin: 0;
@@ -36,4 +38,21 @@
     font-size: 14px;
     color: #555;
     line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+    .cartData{
+        width: 100%;
+        padding: 0 4px;
+        align-items: stretch;
+    }
+    .cart-topic-text{
+        font-size: 18px;
+    }
+    .total{
+        font-size: 14px;
+    }
+    .delivery-note{
+        font-size: 13px;
+    }
 }

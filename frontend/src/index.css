@@ -3,15 +3,28 @@
 
 
 *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Outfit;
-    scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Outfit, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  scroll-behavior: smooth;
+}
+
+:root{
+  --bg: #ffffff;
+  --card: #f5f7fb;
+  --ink: #0f172a;
+  --muted: #475467;
+  --border: #e5e7eb;
+  --accent: #111827;
 }
 
 body{
-    min-height: 100vh;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 a{
@@ -20,8 +33,8 @@ a{
 }
 
 .app{
-    width: 80%;
-    margin: auto;
+  width: min(1200px, 92vw);
+  margin: 0 auto;
 }
 
 @keyframes fadeIn{

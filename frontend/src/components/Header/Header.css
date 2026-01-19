@@ -6,6 +6,7 @@
     border-radius: 25px;
     animation: fadeIn 1s;
     overflow: hidden;
+    background: var(--bg);
 }
 
 .header-right{
@@ -63,7 +64,7 @@
 }
 .header-title p{
     
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     font-weight: 500;
     margin: 0;
 }
@@ -75,11 +76,11 @@
     gap: 10px;
 }
 .header-main h2{
-    font-size: 32px;
+    font-size: clamp(26px, 4vw, 36px);
     margin: 0;
 }
 .header-subtitle{
-    color: #555555;
+    color: var(--muted);
     margin: 0;
     line-height: 1.5;
 }
@@ -101,7 +102,17 @@
 }
 .header-button button {
     cursor: pointer;
-    border: none;
+    border: 1px solid transparent;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.header-button button:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
 }
 
  @media (max-width:750px) {
@@ -123,7 +134,7 @@
     }
 
    .header-left{
-    padding: 20px;
+    padding: 20px 18px 28px;
     margin: auto;
     max-width: 100%;
    }

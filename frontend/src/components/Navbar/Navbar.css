@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: var(--bg);
 }
 
 .brand{
@@ -224,23 +225,24 @@
     .navbar-menu{
         display: none;
         flex-direction: column;
-        position: absolute;
-        top: 60px;
+        position: fixed;
+        top: 0;
         right: 0;
-        background-color: #000;
-        width: 40%;
-        height: 100%;
-        color: white;
-        padding: 30px;
-        font-size: 12px;
-        gap: 30px;
+        background-color: var(--bg);
+        width: 75%;
+        max-width: 320px;
+        height: 100vh;
+        color: var(--ink);
+        padding: 80px 28px 40px;
+        font-size: 14px;
+        gap: 28px;
+        box-shadow: -12px 0 30px rgba(15,23,42,0.12);
     }
 
     .navbar-menu.active{
         display: flex;
         position: fixed;
-        z-index: 1;
-    
+        z-index: 10;
     }
     .navbar-menu hr{
         width: 50px;

@@ -1,9 +1,8 @@
 .all-collection-down{
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr  ;
+    grid-template-columns: repeat(4, minmax(0,1fr));
     margin-top: 30px;
-    
-    
+    gap: 18px;
 }
 .all-collection-up{
     display: flex;
@@ -33,19 +32,25 @@
     margin-left: 15px;
 }
 .sort-dropdown{
-    border: 1px solid #707070;
-    padding: 10px;
-    width: 30%;
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    width: 260px;
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 8px;
+    background: var(--bg);
+    border-radius: 12px;
+    align-items: center;
 }
 
 #sort{
     border: none;
     font-size: 14px;
+    background: transparent;
 }
 .sort-dropdown label{
-    color: #7a7a7a;
+    color: var(--muted);
 }
 
 #sort option{
@@ -55,46 +60,38 @@
 }
 
 @media (max-width:750px) {
+    .all-collection-up{
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+    }
     .all-collection-down{
-        display: grid;
-        grid-template-columns: 1fr 1fr ;
+        grid-template-columns: repeat(2, minmax(0,1fr));
     }
     .sort-dropdown{
-        font-size: 2px;
-        outline: none;
-        width: 50%;
-        height: auto;
-        margin-right: 10px;
+        width: 100%;
+        font-size: 14px;
     }
     .all-collection-topic{
-        font-size: 12px;
+        font-size: 18px;
         display: flex;
         flex-direction: row;
     }
     .all-collectin-bar{
-        display: none;
-        width: 10px;
-        margin-top: auto;
-        margin-bottom: auto;
-    }
-    #sort option{
-        background-color: #000;
-        color: white;
-        border: none;
+        display: inline-block;
     }
 }
 
 @media (max-width:980px) {
     .all-collection-down{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(0,1fr));
     }
     .sort-dropdown{
         width: auto;
         font-size: 14px;
         display: flex;
         gap: 10px;
-        
+        min-width: 220px;
     }
     .all-collection-topic{
         font-size: 18px;
@@ -103,5 +100,14 @@
         background-color: #000;
         color: white;
         border: none;
+    }
+}
+
+@media (max-width:640px) {
+    .all-collection-down{
+        grid-template-columns: repeat(1, minmax(0,1fr));
+    }
+    .sort-dropdown{
+        width: 100%;
     }
 }
