@@ -9,7 +9,8 @@ const ProductDisplay = () => {
   const {products,productData,setProductData,addToCart} = useContext(StoreContext)
     const {productId} =useParams();
     
-    const [image,setImage]=useState('')
+    const [image,setImage]=useState([])
+    const [selectedImage,setSelectedImage] = useState('')
     
     
 
@@ -17,7 +18,8 @@ const ProductDisplay = () => {
         products.map((item)=>{
           if (item._id===productId) {
             setProductData(item)
-            setImage(item.image)
+            setImage(item.image || [])
+            setSelectedImage(item.image?.[0] || '')
             
             return null;
             
@@ -33,10 +35,18 @@ const ProductDisplay = () => {
       <div className="productdata">
           <div className="product-image">
               <div className="side-img">
-                {image?.slice(0,4)?.map((img,i)=>(<img key={i} src={img} alt="" />))}
+                {image?.slice(0,4)?.map((img,i)=>(
+                  <img
+                    key={`${img}-${i}`}
+                    src={img}
+                    alt="Vehicle thumbnail"
+                    className={img===selectedImage ? 'active' : ''}
+                    onClick={()=>setSelectedImage(img)}
+                  />
+                ))}
               </div>
               <div className="main-image">
-                 {image?.[0] && <img src={image[0]} alt="" />}
+                 {(selectedImage || image?.[0]) && <img src={selectedImage || image[0]} alt="Selected vehicle" />}
               </div>
           </div>
           <div className="product-details">
