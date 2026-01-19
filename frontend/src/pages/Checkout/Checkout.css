@@ -1,0 +1,93 @@
+.checkout{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    
+
+}
+.cart-left{
+    display: flex;
+    flex-direction: column;
+}
+.cart-name-topic
+{  margin-top: 8px;
+    width: 50%;
+    font-size: 16px;
+    padding: 8px;
+}
+
+.checkout-title{
+    font-size: 22px;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+.checkout-title span{
+    color: #7a7a7a;
+}
+.cart-personal{
+    width: 100%;
+    font-size: 16px;
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.cart-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-right button{
+    padding: 8px;
+    width: 60%;
+    font-size: 18px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#input-fields{
+    border: 1px solid #000;
+}
+
+.payment-type{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.stripe{
+    margin: 10px;
+    display: flex;
+}
+.razorpay{
+    display: flex;
+    margin: 10px;
+}
+.cod{
+    display: flex;
+    margin: 10px;
+}
+.border{
+    border: 1px solid #b5b1b1;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.select{
+    width: 4px;
+    height: 100%;
+    margin-right: 8px;
+    background-color: rgb(96, 207, 96);
+    border-radius: 4px;
+    margin-left: 8px;
+}
+@media (max-width:750px) {
+    .checkout{
+        display: flex;
+        flex-direction: column;
+    }
+}

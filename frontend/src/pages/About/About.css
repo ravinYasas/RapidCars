@@ -1,0 +1,128 @@
+.about-up{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+}
+.about-middle{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: #7a7a7a;
+
+}
+.about-middle img{
+    width: 70%;
+    margin: auto;
+}
+.about-up-topic{
+    padding: 30px;
+    color: #7a7a7a;
+    font-size: 24px;
+    
+    display: flex;
+}
+
+.about-up-topic span{
+    color: #000;
+}
+
+.about-middle span{
+    color: #000;
+    
+    
+}
+
+.about-bar{
+    width: 40px;
+    height: 2px;
+    background-color: #000;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+}
+.about-paragraph{
+    margin-top: 20px;
+}
+
+.about-down-title{
+        display: flex;
+        color: #7a7a7a;
+        margin-top: 20px;
+        margin-bottom: 40px;
+}
+.about-down-title span{
+    color: #000;
+}
+.about-down-box-container{
+    border: 1px solid #7a7a7a;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.about-down-box-container h4{
+    margin: 10px;
+}
+.about-down-box-container p{
+    padding: 20px;
+    margin: 15px;
+    color: #7b7b7b;
+    
+}
+.about-down-box{
+    display: flex;
+    
+}
+.about-down-box{
+    margin: 50px;
+}
+.about-container{
+    margin: 20px;
+    margin-bottom: 100px;
+    animation: fadeIn 2s;
+}
+
+@media (max-width:750px) {
+    .about-middle{
+        display: flex;
+        flex-direction: column;
+    }
+    .about-up-topic{
+        font-size: 14px;
+    }
+    .about-down-box{
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .about-down-title{
+        font-size: 14px;
+    }
+    .about-down-box-container h4{
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    .about-down-box-container p{
+        font-size: 12px;
+        margin-top: 4px;
+
+    }
+    .about-down-box-container{
+        padding: 8px;
+    }
+}
+
+@media (max-width:1280px) {
+    .about-down-box-container{
+        padding: 2px;
+    }
+    .about-down-box-container h4{
+        margin-top: 4px;
+
+    }
+    .about-down-box-container p{
+        margin-top: 8px;
+    }
+}

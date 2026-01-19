@@ -1,0 +1,59 @@
+.admin_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.admin{
+    border: 1px solid #000;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: #c1c1c14a;
+}
+
+.admin h1{
+    font-size: 18px;
+    justify-content: center;
+    display: flex;
+    margin: 10px;
+}
+
+.flex-col{
+    width: 100%;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+}
+.flex-col p{
+    font-size: 14px;
+}
+.flex-col input{
+  
+  height: 30px;
+  
+}
+
+.email{
+    width: 100%;
+    padding: 8px;
+    margin: 4px;
+}
+.password{
+    width: 100%;
+    padding: 8px;
+    margin: 4px;
+    
+}
+
+.admin button{
+    background-color:#000;
+    color: aliceblue;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px ;
+    cursor: pointer;
+}

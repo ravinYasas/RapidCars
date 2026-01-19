@@ -1,0 +1,40 @@
+.cartData{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    align-items: center;
+}
+.cart-topic-text{
+    display: flex;
+    font-size: 24px;
+}
+.cart-topic-text span{
+    color: #7a7a7a;
+}
+.item-bar{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.total{
+    display: flex;
+    margin: 20px;
+    
+    
+}
+.total  p,b{
+    margin-left: 120px;
+    display: flex;
+    
+}
+.cart-payment{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+.shiping{
+    margin-left: 90px !important;
+}
+.total-amount{
+    margin-left: 140px !important;
+}

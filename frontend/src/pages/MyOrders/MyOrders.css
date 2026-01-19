@@ -1,0 +1,93 @@
+.orders{
+    display: flex;
+    flex-direction: column;
+}
+
+.order-box{
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr;
+}
+.order-item img{
+    width: 100px;
+    height: 110px;
+    margin: 8px;
+}
+.order-price{
+    display: flex;
+    margin: 10px;
+}
+.order-price p{
+    margin-right: 10px;
+}
+.order-price-span{
+    color: #7a7a7a;
+}
+.orders-status{
+    display: flex;
+}
+.dot{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 4px;
+    background-color: lightgreen;
+}
+
+.track-order{
+    width: 60%;
+    height: 50%;
+    background-color: #7a7a7a26;
+    border: none;
+    border-radius: 4px;
+
+}
+
+@media (max-width:1250px) {
+    .order-item img{
+        width: 80px;
+        height: 90px;
+    }
+}
+
+@media (max-width:950px) {
+    .order-item img{
+        width: 70px;
+        height: 80px;
+    }
+    .order-box{
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #7a7a7a;
+    }
+    .track-order{
+        margin-bottom: 10px;
+        width: 80%;
+        height: 20px;
+    }
+}
+
+@media (max-width:750px) {
+    .order-item img{
+        width: 60px;
+        height: 70px;
+    }
+    .order-box{
+        display: grid;
+        grid-template-columns:  1fr 1fr;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #7a7a7a;
+    }
+    .track-order{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 80%;
+        height: 20px;
+    }
+    .orders-status{
+        margin-top: 10px;
+    }
+}

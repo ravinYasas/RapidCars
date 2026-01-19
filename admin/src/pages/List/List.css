@@ -1,0 +1,47 @@
+.list-container{
+    display: flex;
+    flex-direction: column;
+    
+    margin: auto;
+    
+    width: 80%;
+}
+.list-topic-main{
+    display: flex;
+    font-size: 22px;
+    color: #4a4a4a;
+}
+.list-topic{
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+}
+.list-topic span{
+    color: #000;
+}
+.bar{
+    margin-left: 10px;
+    width: 30px;
+    height: 3px;
+    background-color: #000;
+}
+.list-table-format{
+    display: grid;
+    grid-template-columns: 0.5fr 1.2fr 0.5fr 0.7fr 0.75fr 0.8fr 0.5fr;
+    margin: 6px;
+    padding: 4px;
+    border-bottom: 1px solid #000;
+}
+.list-table-format img{
+    width: 70px;
+}
+.cursor{
+    cursor: pointer;
+}
+
+@media (max-width:800px) {
+    .list-table-format{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}

@@ -1,0 +1,14 @@
+.collection-container{
+    display: grid;
+    grid-template-columns: 1.5fr 5fr;
+    animation: fadeIn 2s;
+    
+}
+
+
+@media (max-width:750px) {
+    .collection-container{
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,47 @@
+
+.bestSeller{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    animation: fadeIn 3s;
+}
+.bestSeller-topic span{
+    color: black;
+}
+
+.bestSeller-container{
+    display: grid;
+    grid-template-columns: 1fr  1fr 1fr 1fr 1fr;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+}
+.bestSeller-bar{
+    width: 30px;
+    height: 2px;
+    border: none;
+    background-color:black;  
+    
+}
+.bestSeller-topic{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    margin: 20px;
+    font-size: 28px;
+    color: #707070;
+}
+
+.bestSeller-text{
+    color: #707070;
+    font-size: 18px;
+}
+
+@media (max-width:750px) {
+.bestSeller-container{
+    grid-template-columns: 1fr 1fr;
+}
+}

@@ -1,0 +1,53 @@
+.subcribe-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+.subcribe-container p{
+    font-size: 16px;
+    color: #707070;
+    margin-top: 12px;
+}
+.subcribe-box{
+    display: flex;
+    flex-direction: row;
+   margin-top: 20px;
+    justify-content: center;
+}
+
+.subcribe-container input{
+    margin-top: 20px;
+    width: 100%;
+    font-size: 20px;
+    height:auto;
+}
+
+.subcribe-container button{
+    color: white;
+    background-color: black;
+    border: none;
+    font-size: 14px;
+    margin-top: 20px;
+    padding: 0px 20px;
+    cursor: pointer;
+    
+}
+
+@media (max-width:750px) {
+    .subcribe-container h2{
+        font-size: 14px;
+    }
+    .subcribe-container p{
+        font-size: 12px;
+    }
+    .subcribe-container input{
+        width: 80%;
+        font-size: 12px;
+    }
+    .subcribe-container button{
+        font-size: 12px;
+        padding: 6px;
+
+    }
+}
