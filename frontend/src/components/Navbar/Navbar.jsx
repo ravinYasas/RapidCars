@@ -6,7 +6,7 @@ import { StoreContext } from '../../context/StoreContext'
 
 const Navbar = ({setShowLogin}) => {
 
-    const[menu,setMenu] =useState("home");
+    const[menu,setMenu] =useState("");
     const navigate =useNavigate();
     //sidebar setup
     const [isOpen,setIsOpen] = useState(false);
@@ -16,14 +16,20 @@ const Navbar = ({setShowLogin}) => {
 
     useEffect(()=>{
         const path = location.pathname;
-        if (path.startsWith('/collection')) {
+        if (path === '/') {
+            setMenu('home');
+        } else if (path.startsWith('/collection')) {
             setMenu('collection');
         } else if (path.startsWith('/about')) {
             setMenu('about');
         } else if (path.startsWith('/contact')) {
             setMenu('contact');
         } else {
-            setMenu('home');
+            setMenu('');
+        }
+
+        if (!path.includes('collection')) {
+            setIsSOpen(false);
         }
 
         if (path.includes('collection') && isSOpen) {
@@ -61,7 +67,9 @@ const Navbar = ({setShowLogin}) => {
         
         <div className="navbar-right">
             
-            <img onClick={()=>setIsSOpen(!isSOpen)} src={assets.search_icon} alt="" />
+                        {location.pathname.startsWith('/collection') && (
+                            <img onClick={()=>setIsSOpen(!isSOpen)} src={assets.search_icon} alt="" />
+                        )}
             {!token?<button className='signin' onClick={()=>navigate('/login')}>Sign In</button>
             :<div className="navbar-profile">   
                 <Link ><img src={assets.profile_icon} alt="" /></Link>
@@ -72,21 +80,25 @@ const Navbar = ({setShowLogin}) => {
                 </ul>
             </div>
             }
-            <div className="navbar-search-icon">
-                <Link to='/cart'><img src={assets.cart_icon} alt="" /></Link>
-                <div className={"dot"}><p className='cart' >{getCartCount()}</p></div>
-            </div>
+                        <div className="navbar-search-icon">
+                                <Link to='/cart' className="cart-link">
+                                    <img src={assets.cart_icon} alt="" />
+                                    <span className="cart-count">{getCartCount()}</span>
+                                </Link>
+                        </div>
             <div className="navbar-sidebar">
                 <img src={assets.menu_icon} alt="" onClick={()=>setIsOpen(!isOpen)}/>
             </div>
         </div>
     </div>
-    <div className={`navbar-search ${isSOpen?"active":""}`}>
-        <div className="search">
-        <input  type="text" placeholder='Search Here' value={search} onChange={(e)=>setSearch(e.target.value)} />
-        <img  onClick={()=>setIsSOpen(isOpen)} src={assets.cross_icon} alt="" />
-        </div>
-    </div>
+        {location.pathname.startsWith('/collection') && (
+            <div className={`navbar-search ${isSOpen?"active":""}`}>
+                    <div className="search">
+                    <input  type="text" placeholder='Search Here' value={search} onChange={(e)=>setSearch(e.target.value)} />
+                    <img  onClick={()=>setIsSOpen(false)} src={assets.cross_icon} alt="" />
+                    </div>
+            </div>
+        )}
     </div>
   )
 }

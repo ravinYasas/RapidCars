@@ -1,11 +1,15 @@
 import { StoreContext } from '../../context/StoreContext'
 import './CartTotal.css'
 
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 
 const CartTotal = () => {
 
-    const {getCartAmount} = useContext(StoreContext);
+        const {getCartAmount} = useContext(StoreContext);
+        const formattedTotal = useMemo(()=>{
+            const raw = getCartAmount();
+            return Number(raw || 0).toLocaleString('en-LK');
+        },[getCartAmount]);
     
 
   return (
@@ -17,7 +21,7 @@ const CartTotal = () => {
         <div className="cart-payment">
         <div className="total">
             <p>SubTotal</p>
-            <p>LKR {getCartAmount()}</p>
+            <p>LKR {formattedTotal}</p>
         </div>
         <div className="total">
             <p>Shipping / Delivery</p>
@@ -25,7 +29,7 @@ const CartTotal = () => {
         </div>
         <div className="total">
             <b>Total</b>
-            <b className='total-amount'>LKR {getCartAmount()}</b>
+            <b className='total-amount'>LKR {formattedTotal}</b>
         </div>
         <p className="delivery-note">If you wish, we can deliver your car to your doorstep when the shipment arrives; handover typically within 2 months.</p>
         </div>

@@ -1,13 +1,14 @@
 .all-collection-down{
     display:grid;
     grid-template-columns: repeat(4, minmax(0,1fr));
-    margin-top: 30px;
-    gap: 18px;
+    margin-top: 24px;
+    gap: 16px;
 }
 .all-collection-up{
     display: flex;
     justify-content:  space-between;
-    margin-top: 20px;
+    margin-top: 12px;
+    gap: 12px;
     
 }
 
@@ -34,7 +35,7 @@
 .sort-dropdown{
     border: 1px solid var(--border);
     padding: 10px 12px;
-    width: 260px;
+    width: 240px;
     max-width: 100%;
     display: flex;
     justify-content: space-between;
@@ -67,10 +68,12 @@
     }
     .all-collection-down{
         grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 12px;
     }
     .sort-dropdown{
         width: 100%;
         font-size: 14px;
+        padding: 10px;
     }
     .all-collection-topic{
         font-size: 18px;
@@ -106,8 +109,10 @@
 @media (max-width:640px) {
     .all-collection-down{
         grid-template-columns: repeat(1, minmax(0,1fr));
+        gap: 14px;
     }
     .sort-dropdown{
         width: 100%;
+        padding: 10px 12px;
     }
 }

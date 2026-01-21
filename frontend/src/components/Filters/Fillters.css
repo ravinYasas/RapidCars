@@ -1,6 +1,6 @@
 .filters-container{
     color: var(--muted);
-    padding: 12px;
+    padding: 12px 10px;
     background: var(--bg);
 }
 .categories{
@@ -99,6 +99,6 @@
     .filter.active{
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 8px;
     }
 }

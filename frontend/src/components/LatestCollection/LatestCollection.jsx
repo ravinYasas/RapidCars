@@ -20,8 +20,8 @@ const LatestCollection = () => {
 
     <div className='latest-collection'>
         <div className="latest-collection-title">
-            <h2><span>LATEST </span>COLLECTIONS</h2>
-            <p></p>
+            <p>Latest <span>Collection</span></p>
+            <p className="latest-collection-bar"></p>
         </div>
         <p className='latest-collection-text'>Fresh arrivals direct from Japan auctions with verified sheets and landed cost guidance.</p>
         <div className="latest-collection-image">

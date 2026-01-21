@@ -3,7 +3,7 @@ import { StoreContext } from '../../context/StoreContext.jsx'
 import './MyOrders.css'
 
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 
 const MyOrders = () => {
   const {backendUrl,token} =useContext(StoreContext)
@@ -41,42 +41,72 @@ const MyOrders = () => {
       fetchOrders()
     }
   },[token])
+
+  const renderStatus = (status)=>{
+    if (!status) return 'Pending';
+    return status;
+  }
+
   return (
-    <div className='order-container'>
-      <div className="cart-topic">
-      <div>My <span>Orders</span></div>
-      <p className='item-bar'></p>
-      </div>
-        {loading && <p className='muted'>Loading your orders...</p>}
-        {!loading && orderdata.length===0 && <p className='muted'>No orders yet. Add a vehicle to your pre-order cart to get started.</p>}
-        <div className="orders">
-          {
-            orderdata.map((item,index)=>(
-              <div key={index} className="order-box">
-                <div className="order-item">
-                <img src={item.image?.[0]} alt="" />
-                </div>
-                <div className="order-name">
-                    <p className='vehicle-name'>{item.name}</p>
-                    <div className="order-price">
-                        <p className='label'>Estimated up to</p>
-                        <p className='value'>LKR {item.price?.toLocaleString?.()}</p>
-                    </div>
-                    <p>Deposit: <span className='order-price-span'>LKR {(item.depositRequired || 50000).toLocaleString?.()}</span></p>
-                    <p>Quantity: <span className='order-price-span'>{item.quantity}</span></p>
-                    <p>Date: <span className='order-price-span' >{new Date(item.date).toDateString()}</span></p>
-                    {item.depositReference && <p>Deposit Reference: <span className='order-price-span'>{item.depositReference}</span></p>}
-                    {item.depositAmount && <p>Total Deposit Charged: <span className='order-price-span'>LKR {item.depositAmount?.toLocaleString?.()}</span></p>}
-                </div>
-                <div className="orders-status">
-                  <p className="dot"></p>
-                <p>{item.status}</p>
-                </div>
-                <button className='track-order'>Track Order</button>
-              </div> 
-              ))
-          }
+    <div className='orders-page'>
+      <div className="orders-hero">
+        <div>
+          <p className="orders-title">My Orders</p>
+          <p className="orders-subtitle">Track your vehicle pre-orders, deposits, and delivery progress.</p>
         </div>
+        <button className="ghost-btn" onClick={fetchOrders} disabled={loading}>
+          {loading ? 'Refreshing...' : 'Refresh'}
+        </button>
+      </div>
+
+      {loading && <p className='muted'>Loading your orders...</p>}
+      {!loading && orderdata.length===0 && (
+        <div className="orders-empty">
+          <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f697.svg" alt="Car" />
+          <div>
+            <p className="empty-title">No orders yet</p>
+            <p className="empty-subtitle">Add a vehicle to your pre-order cart to get started.</p>
+          </div>
+          <a href="/collection" className="primary-link">Browse vehicles</a>
+        </div>
+      )}
+
+      <div className="orders-grid">
+        {orderdata.map((item,index)=>{
+          const price = item.price?.toLocaleString?.('en-LK');
+          const depositRequired = (item.depositRequired || 50000)?.toLocaleString?.('en-LK');
+          const depositAmount = item.depositAmount?.toLocaleString?.('en-LK');
+          const dateStr = item.date ? new Date(item.date).toDateString() : '—';
+          const name = item.make || item.model ? `${item.make || ''} ${item.model || ''} ${item.year || ''}`.trim() : item.name;
+
+          return (
+            <div key={index} className="order-card">
+              <div className="order-card-main">
+                <img src={item.image?.[0]} alt={name} className="order-img" />
+                <div className="order-info">
+                  <p className="vehicle-name">{name || 'Vehicle'}</p>
+                  <p className="order-meta">Chassis {item.chassisCode || '—'} • Grade {item.grade || '—'} • {item.transmission || '—'}</p>
+                  <p className="order-meta subtle">Fuel {item.fuel || '—'} • Mileage {item.mileage ? `${item.mileage.toLocaleString()} km` : '—'}</p>
+                  <div className="order-tags">
+                    <span className="tag">Est. LKR {price || '—'}</span>
+                    <span className="tag muted">Deposit LKR {depositRequired || '—'}</span>
+                    <span className="tag muted">Qty {item.quantity}</span>
+                  </div>
+                  <div className="order-foot">
+                    <span className="muted">Placed: {dateStr}</span>
+                    {item.depositReference && <span className="muted">Ref: {item.depositReference}</span>}
+                    {depositAmount && <span className="muted">Paid: LKR {depositAmount}</span>}
+                  </div>
+                </div>
+              </div>
+              <div className="order-card-actions">
+                <span className={`status-pill ${renderStatus(item.status).toLowerCase().replace(/\s+/g,'-')}`}>{renderStatus(item.status)}</span>
+                <button className='track-order'>Track Order</button>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

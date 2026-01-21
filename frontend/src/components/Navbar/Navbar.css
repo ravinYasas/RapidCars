@@ -1,3 +1,10 @@
+.navbar-container{
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--bg);
+}
+
 .navbar{
     padding: 20px 0px;
     display: flex;
@@ -9,7 +16,7 @@
 .brand{
     display: inline-flex;
     align-items: center;
-    gap: -2px;
+    gap: 0px;
     text-decoration: none;
 }
 
@@ -20,7 +27,8 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     position: relative;
-    top: 4px;
+    top: 6px;
+    left: -10px;
 }
 
 .navbar .loogo{
@@ -54,26 +62,23 @@
 }
 
 .navbar-search-icon{
-    position: relative;
+    display: inline-flex;
+    align-items: center;
 }
 
-.navbar-search-icon .dot{
-    position: absolute;
-    min-width: 15px;
-    min-height: 15px;
-    background-color: #000000;
-    border-radius: 50%;
-    top: 15px;
-    right: -1px;
-    
-    font-size: 12px;
+.cart-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: inherit;
 }
 
-.cart{
-    color: rgb(4, 4, 4);
-    text-align: center;
-    
+.cart-count{
+    font-weight: 700;
+    font-size: 13px;
+    color: #0f172a;
 }
+
 .navbar-profile{
     position: relative;
 }
@@ -82,7 +87,7 @@
     position: absolute;
     display: none;
     right: 0;
-    z-index: 1;
+    z-index: 50;
 }
 
 .navbar-profile:hover .navbar-profile-dropdown{
@@ -158,14 +163,30 @@
 }
 
 .signin{
-    width: 70px;
-    height: 30px;
-    border: none;
-    background-color: #000;
-    color: #fafafa;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid #0f172a;
+    background-color: #0f172a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
     cursor: pointer;
-    border-radius: 4px;
-    padding: 4px;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(15,23,42,0.12);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.15s ease, color 0.15s ease;
+}
+.signin:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(15,23,42,0.18);
+    background-color: #111827;
+    border-color: #111827;
+}
+.signin:active{
+    transform: translateY(0);
+    box-shadow: 0 10px 24px rgba(15,23,42,0.12);
 }
 
 @media (max-width:1050px) {
@@ -202,8 +223,9 @@
         width: 20px;
     }
     .navbar-right button{
-        padding: 7px 20px;
-        font-size: 15px;
+        padding: 8px 14px;
+        font-size: 14px;
+        border-radius: 10px;
     }
     
 }
@@ -214,12 +236,11 @@
     }
     .navbar-sidebar{
         position: relative;
-        
-        width: 8px;
-        height: 8px;
+        width: 32px;
+        height: 32px;
         display: block;
-        margin-top: -20px;
-        margin-left: 15px;
+        margin-top: -4px;
+        margin-left: 8px;
     }
    
     .navbar-menu{
@@ -242,7 +263,7 @@
     .navbar-menu.active{
         display: flex;
         position: fixed;
-        z-index: 10;
+        z-index: 60;
     }
     .navbar-menu hr{
         width: 50px;
