@@ -71,7 +71,15 @@ const ProductDisplay = () => {
           </div>
       </div>
      <Description/>
-      <RelatedProduct category={productData.category} subCategory={productData.subCategory}/>
+      <RelatedProduct
+        id={productData._id}
+        make={productData.make}
+        model={productData.model}
+        grade={productData.grade}
+        price={productData.startingPrice || productData.price}
+        category={productData.category}
+        subCategory={productData.subCategory}
+      />
     </div>
   ):
   <div></div>
