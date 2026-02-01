@@ -62,7 +62,8 @@ const StoreContextProvider = (props) => {
       productsCopy =productsCopy.filter(item =>  item.name.toLowerCase().includes(search.toLowerCase()))
     }
     if (makeFilters.length>0) {
-        productsCopy=productsCopy.filter(item=>makeFilters.includes(item.make));
+      const normalizeMake = make => make && make.trim() ? make.trim().charAt(0).toUpperCase() + make.trim().slice(1).toLowerCase() : '';
+      productsCopy = productsCopy.filter(item => makeFilters.includes(normalizeMake(item.make)));
     }
     if (modelFilters.length>0) {
       productsCopy=productsCopy.filter((item)=>modelFilters.includes(item.model));

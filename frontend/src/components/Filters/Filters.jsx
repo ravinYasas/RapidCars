@@ -9,13 +9,17 @@ const Filters = () => {
   const {makeFilters,modelFilters,yearFilters,chassisFilters,toggleMake,toggleModel,toggleYear,toggleChassis,products,setModelFilters,setMakeFilters,setYearFilters,setChassisFilters} =useContext(StoreContext)
 
   const options = useMemo(()=>{
-    const makes = Array.from(new Set(products.map(p=>p.make).filter(Boolean)));
+    // Normalize make names: trim and capitalize first letter, rest lowercase
+    const normalizeMake = make => make && make.trim() ? make.trim().charAt(0).toUpperCase() + make.trim().slice(1).toLowerCase() : '';
+    const makes = Array.from(new Set(products.map(p => normalizeMake(p.make)).filter(Boolean)));
 
-    const filteredByMake = makeFilters.length
-      ? products.filter(p=>makeFilters.includes(p.make))
-      : products;
+      // Filter products by normalized selected make
+      const filteredByMake = makeFilters.length
+        ? products.filter(p => makeFilters.includes(normalizeMake(p.make)))
+        : products;
 
     const models = Array.from(new Set(filteredByMake.map(p=>p.model).filter(Boolean)));
+      // Only show models for the selected make
 
     const filteredByModel = modelFilters.length
       ? filteredByMake.filter(p=>modelFilters.includes(p.model))
@@ -34,14 +38,20 @@ const Filters = () => {
         <div className="categories">
             <p>Make</p>
             <ul className="categories-checkbox">
-              {options.makes.map(make=>(
-                <li key={make}><input type="checkbox" value={make} onChange={(e)=>{
-                  const next = e.target.checked ? [make] : [];
-                  setMakeFilters(next);
-                  setModelFilters([]);
-                  setChassisFilters([]);
-                  setYearFilters([]);
-                }} checked={makeFilters.includes(make)} /> {make}</li>
+              {options.makes.map(make => (
+                <li key={make}>
+                  <input
+                    type="checkbox"
+                    value={make}
+                    onChange={() => {
+                      setMakeFilters(makeFilters.includes(make) ? [] : [make]);
+                      setModelFilters([]);
+                      setChassisFilters([]);
+                      setYearFilters([]);
+                    }}
+                    checked={makeFilters.includes(make)}
+                  /> {make}
+                </li>
               ))}
             </ul>           
         </div>
