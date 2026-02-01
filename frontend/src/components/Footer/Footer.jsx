@@ -1,4 +1,5 @@
 import {assets} from '../../assets/assets'
+import preOrderGuide from './Direct Vehicle Import Process.pdf'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -38,7 +39,9 @@ const Footer = () => {
                 <li>
                   <Link className="hover:text-ink transition-colors" to="/about">About Rapid Cars</Link>
                 </li>
-                <li className="hover:text-ink transition-colors cursor-pointer">Pre-order Guide</li>
+                <li>
+                  <a className="hover:text-ink transition-colors" href={preOrderGuide} target="_blank" rel="noopener noreferrer">Pre-order Guide</a>
+                </li>
                 <li className="hover:text-ink transition-colors cursor-pointer">Transparency Policy</li>
               </ul>
             </div>
